@@ -2,13 +2,13 @@
   const canvas = document.querySelector("#game");
   const ctx = canvas.getContext("2d");
   // check if user has resolution to play the game
-  if (window.innerHeight < 800 || window.innerWidth < 800) {
-    canvas.style.border = "none";
-    alert(
-      "Sorry this game is meant for devices with at least 800x800 screen resolution."
-    );
-    return;
-  }
+  // if (window.innerHeight < 800 || window.innerWidth < 800) {
+  //   canvas.style.border = "none";
+  //   alert(
+  //     "Sorry this game is meant for devices with at least 800x800 screen resolution."
+  //   );
+  //   return;
+  // }
 
   const gameOver = () => {
     global.inPlay = false;
@@ -150,6 +150,9 @@
 
   const handleMouseClick = (e) => {
     if (global.canShoot) {
+      const laser = new Audio("laser.m4a");
+      laser.play();
+      laser.volume = 0.04;
       const x = getMouseCoordinates(e)[0] - canvas.width / 2;
       const y = getMouseCoordinates(e)[1] - canvas.height / 2;
       const angle = Math.atan2(y, x);
@@ -271,6 +274,9 @@
       global.projectiles.forEach((projectile) => {
         result = isCollide(this, projectile);
         if (result && this.alive && projectile.alive) {
+          const pop = new Audio("./pop.m4a");
+          pop.volume = 0.08;
+          pop.play();
           projectile.alive = false;
           global.enemyHitCounter++;
           incrementScore();
