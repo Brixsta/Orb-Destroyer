@@ -72,7 +72,8 @@
     global.enemyCounter = 0;
     global.projectiles = [];
     global.enemies = [];
-    scoreBoard.innerHTML = `Score: ${global.gameScore}`;
+    (global.enemySpeedMultiplier = 0.5),
+      (scoreBoard.innerHTML = `Score: ${global.gameScore}`);
     setTimeout(() => {
       global.canShoot = true;
     }, 0);
