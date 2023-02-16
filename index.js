@@ -150,7 +150,7 @@
 
   const handleMouseClick = (e) => {
     if (global.canShoot) {
-      const laser = new Audio("laser.m4a");
+      const laser = new Audio("./audio/laser.m4a");
       laser.play();
       laser.volume = 0.04;
       const x = getMouseCoordinates(e)[0] - canvas.width / 2;
@@ -265,6 +265,9 @@
     collidesWithPlayer() {
       const result = isCollide(this, player);
       if (result && this.alive) {
+        const shock = new Audio('./audio/shock.mp3');
+        shock.volume = .1;
+        shock.play();
         gameOver();
       }
     }
@@ -274,7 +277,7 @@
       global.projectiles.forEach((projectile) => {
         result = isCollide(this, projectile);
         if (result && this.alive && projectile.alive) {
-          const pop = new Audio("./pop.m4a");
+          const pop = new Audio("./audio/pop.m4a");
           pop.volume = 0.08;
           pop.play();
           projectile.alive = false;
